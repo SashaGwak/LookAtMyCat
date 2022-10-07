@@ -3,7 +3,7 @@ const app = express();
 
 /* DB */ 
 const mongoose = require('mongoose');
-const MONGODB_URI = 'mongodb+srv://poemha:Mini1028!@clustertest.bwpwhd8.mongodb.net/Cat';
+const MONGODB_URI = 'mongodb+srv://poemha:<password>!@clustertest.bwpwhd8.mongodb.net/Cat';
 
 app.get('/', function(req, res) {
   res.send('Hello world!');
