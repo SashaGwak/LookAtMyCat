@@ -1,0 +1,21 @@
+@import './reset.css';
+
+.navbar {
+  width: 100%;
+  display: flex;
+  // border: 1px solid red;
+  padding: 2%;
+  align-items: center;
+  justify-content: space-between;
+  background-color: lavender;
+  box-sizing: border-box;
+}
+
+.navbar_items {
+  display: flex;
+}
+
+.navbar_items li {
+  list-style: none;
+  margin: 0px 2vw;
+} 
