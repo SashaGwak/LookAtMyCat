@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Navbar from './Navbar';
+import ReactRouter from './reactRouter';
+import { BrowserRouter} from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <>
-    <Navbar />
-  </>
+    <BrowserRouter> 
+      <Navbar />
+      <ReactRouter />
+    </BrowserRouter>
 );
 

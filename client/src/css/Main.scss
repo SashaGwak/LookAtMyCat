@@ -1,0 +1,39 @@
+.main-container {
+    padding: 1rem;
+    margin: auto;
+
+    & .form{
+        // display: flex;
+        width: 30%;
+        min-width: 300px;
+        margin: auto;
+        padding: 5rem 0;
+        text-align: center;
+    }
+}
+
+form {
+    display: inline;
+}
+
+.form-contol {
+    margin: 1rem 0;
+}
+
+.form-control label,
+.form-control input,
+.form-control textarea {
+display: block;
+width: 100%;
+margin-bottom: 0.25rem;
+}
+
+button {
+    display: inline-block;
+    padding: 0.25rem 1rem;
+    border: 1px solid lavender;
+    color: black;
+    background: lavender;
+    border-radius: 3px;
+    margin: 0.5rem 0;
+}
