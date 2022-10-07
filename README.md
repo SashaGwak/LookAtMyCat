@@ -1,2 +1,1 @@
-# miniShop
-miniShop is mini project
+# Look at my cat
