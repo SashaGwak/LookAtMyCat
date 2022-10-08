@@ -4,11 +4,7 @@ const app = express();
 /* bodyParser */
 const bodyParser = require('body-parser'); 
 app.use(bodyParser.urlencoded({ extended: false })); 
-app.use(bodyParser.json())
-
-/* cors */
-var cors = require('cors');
-app.use(cors())
+app.use(bodyParser.json());
 
 const data = {
   'id' : 'sihaha', 
@@ -17,30 +13,23 @@ const data = {
 
 /* DB */ 
 const mongoose = require('mongoose');
-const MONGODB_URI = 'mongodb+srv://poemha:<password>!@clustertest.bwpwhd8.mongodb.net/Cat';
+const MONGODB_URI = 'mongodb+srv://poemha:Mini1028!@clustertest.bwpwhd8.mongodb.net/Cat';
 
-app.get('/', (req, res) => {
-  res.send('Hello world!');
-}); 
+/* routes */
+const authRouter = require('./routes/auth');
+const feedRouter = require('./routes/feed');
 
-app.get('/api/user/login', (req, res) => {
-  res.json(data);
-}); 
+app.use('/api', feedRouter); 
+app.use('/api/user', authRouter);
 
-app.post('/api/user/login', (req, res) => {
-  const { id , password, email} = req.body;
-  console.log(id, email, password);
-  res.send('Success');
-}); 
+mongoose.connect(MONGODB_URI)
+  .then(result => {
+    app.listen(8000, () => {
+      console.log('Server start!');
+    });
+  })
+  .catch(err => console.log(err)); 
 
-// mongoose.connect(MONGODB_URI)
-//   .then(result => {
-//     app.listen(8000, () => {
-//       console.log('Server start!');
-//     });
-//   })
-//   .catch(err => console.log(err)); 
-
-app.listen(8000, () => {
-  console.log('Server start!');
-});
+// app.listen(8000, () => {
+//   console.log('Server start!');
+// });
