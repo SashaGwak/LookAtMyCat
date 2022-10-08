@@ -6,10 +6,6 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false })); 
 app.use(bodyParser.json());
 
-/* cors */
-var cors = require('cors');
-app.use(cors())
-
 const data = {
   'id' : 'sihaha', 
   'email' : 'test@test.com'

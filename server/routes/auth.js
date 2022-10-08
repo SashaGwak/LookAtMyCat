@@ -17,8 +17,7 @@ router.post('/signup', async (req, res) => {
       password: password
     }); 
     await user.save(err => {console.log(err)});
-    console.log(id, email, password);
-    return res.send('Success');
+    return res.send({isCreate: true});
 }); 
 
 module.exports = router;
