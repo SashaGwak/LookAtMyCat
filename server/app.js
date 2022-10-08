@@ -18,27 +18,13 @@ const data = {
 /* DB */ 
 const mongoose = require('mongoose');
 const MONGODB_URI = 'mongodb+srv://poemha:Mini1028!@clustertest.bwpwhd8.mongodb.net/Cat';
-const User = require('./models/user');
 
-app.get('/', (req, res) => {
-  res.send('Hello world!');
-}); 
+/* routes */
+const authRouter = require('./routes/auth');
+const feedRouter = require('./routes/feed');
 
-app.get('/api/user/signup', (req, res) => {
-  res.json(data);
-}); 
-
-app.post('/api/user/signup', async (req, res) => {
-  const { id , password, email} = req.body;
-  const user = new User({
-    id: id, 
-    email: email, 
-    password: password
-  }); 
-  await user.save(err => {console.log(err)});
-  console.log(id, email, password);
-  return res.send('Success');
-}); 
+app.use('/api', feedRouter); 
+app.use('/api/user', authRouter);
 
 mongoose.connect(MONGODB_URI)
   .then(result => {
