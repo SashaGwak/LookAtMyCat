@@ -6,10 +6,8 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false })); 
 app.use(bodyParser.json());
 
-const data = {
-  'id' : 'sihaha', 
-  'email' : 'test@test.com'
-};
+/* env */
+require('dotenv').config(); 
 
 /* DB */ 
 const mongoose = require('mongoose');

@@ -49,4 +49,19 @@ router.post('/login', async(req, res) => {
   })
 });
 
+/* google passport */
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20');
+
+module.exports = () => {
+  passport.use(
+    new GoogleStrategy(
+      {
+        id : process.env.GOOGLE_ID, 
+      }
+    )
+  )
+
+}
+
 module.exports = router;
