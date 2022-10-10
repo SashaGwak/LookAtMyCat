@@ -1,5 +1,12 @@
 const express = require('express');
 const app = express(); 
+const passport = require('passport');
+
+/* session */
+const session = require('express-session');
+app.use(session({ secret: 'secretcats' }));
+app.use(passport.initialize()); 
+app.use(passport.session());
 
 /* bodyParser */
 const bodyParser = require('body-parser'); 
