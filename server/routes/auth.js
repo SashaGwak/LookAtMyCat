@@ -65,9 +65,19 @@ router.post('/login', async(req, res) => {
   const { id, password } = req.body; 
   User.findOne({id: id})
   .then(data => { 
+    // 토큰 생성
+    let token = jwt.sign({
+      email: data.email
+    }, 
+      secretObj.secret, // 비밀키
+    {
+      expiresIn: '5m' // 유효시간 5분 
+    })
+    // 비밀번호 비교
     bcrypt.compare(password, data.password)
     .then(doMatch => {
       if (doMatch) {
+        // res.cookie('user', token); 
         return res.send({isLogin: true});
       } else {
         return res.send({isLogin: false});

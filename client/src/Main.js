@@ -17,7 +17,7 @@ function Main () {
   return (
     <>
       <h1>여기는 메인</h1>
-      <h2>{user}</h2>
+      {/* <h2>{user}</h2> */}
     </>
   )
 }

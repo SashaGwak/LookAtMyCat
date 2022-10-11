@@ -13,6 +13,12 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false })); 
 app.use(bodyParser.json());
 
+/* JWT */
+const jwt = require('jsonwebtoken');
+let jwtObj = {};
+jwtObj.secret = process.env.jwtSecret 
+const secretObj = jwtObj; // 비밀키 
+
 /* 로그인 확인 미들웨어 */
 function isLoggedIn(req, res, next) {
   req.user ? next() : res.sendStatus(401);
