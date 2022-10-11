@@ -4,19 +4,9 @@ const crypto = require('crypto');
 
 const User = require('../models/user'); 
 
-/* 로그인 확인 미들웨어 */
-function isLoggedIn(req, res, next) {
-  req.user ? next() : res.sendStatus(401);
-}
-
 /* passport */
 const passport = require('passport'); 
 require('./passport');
-
-/* 구글 패스포트 페이지 */
-router.get('/google', (req, res) => {
-  res.send('<a href="/api/user/google/login">Authenticate with Google</a>');
-});
 
 /* 패스포트 로그인 기능 */
 router.get('/google/login', 
@@ -47,7 +37,7 @@ const createHashedPassword = (password) => {
 const verifyPassword = (password, salt, userPassword) => {
   const hashed = crypto.pbkdf2Sync(password, salt, 1000, 64, 'sha512').toString('base64');
 
-  if (hashed == userPassword) return true; 
+  if (hashed === userPassword) return true; 
   return false; 
 }
 
@@ -70,12 +60,14 @@ router.post('/login', async(req, res) => {
   const { id, password } = req.body; 
   User.findOne({id: id})
   .then(data => {
-    if (verifyPassword( password, salt, data.password)) {
+    if (verifyPassword(password, salt, data.password)) {
+      req.session.displayName = data.name; 
       return res.send({isLogin: true});
     } else {
       return res.send({isLogin: false});
     }
   })
+  // return res.send({isLogin: false});
 });
 
 /* 로그아웃 기능 */

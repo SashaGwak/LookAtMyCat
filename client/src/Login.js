@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const replace = useNavigate(); 
+  // local 로그인 부분 
   const send = () => {
     let form = document.getElementById('userdata'); 
     axios({
@@ -23,16 +24,6 @@ function Login() {
     })
     .catch(err => console.log(err));
   }
-  // const goToGoogle = () => {
-  //   axios({
-  //     method: 'get', 
-  //     url : '/api/user/google', 
-  //     data : {
-  //       id : form.id.value, 
-  //       password : form.password.value, 
-  //     }
-  //   })
-  // }
   return (
     <div className='main-container'>
       <div className='form'>
@@ -48,6 +39,7 @@ function Login() {
           </div>
           <button type='button' onClick={ send }>로그인</button><br />
         </form>
+        {/* Google Passport부분 */}
         <form action='/api/user/google/login' method='GET'>
           <button>구글 로그인</button>
         </form>
