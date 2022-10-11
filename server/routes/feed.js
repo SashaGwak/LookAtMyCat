@@ -8,7 +8,8 @@ function isLoggedIn(req, res, next) {
 
 /* 메인페이지 */
 router.get('/', isLoggedIn, (req, res) => {
-    res.send(`Hello ${req.user.displayName}`);
+    res.send('Hello main'); 
+    // res.send(`Hello ${req.user.displayName}`);
   }); 
   
 module.exports = router;
