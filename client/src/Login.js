@@ -23,6 +23,16 @@ function Login() {
     })
     .catch(err => console.log(err));
   }
+  // const goToGoogle = () => {
+  //   axios({
+  //     method: 'get', 
+  //     url : '/api/user/google', 
+  //     data : {
+  //       id : form.id.value, 
+  //       password : form.password.value, 
+  //     }
+  //   })
+  // }
   return (
     <div className='main-container'>
       <div className='form'>
@@ -36,7 +46,10 @@ function Login() {
             <label htmlFor='name'>😻 비밀번호 : </label>
             <input type="password" name='password' placeholder="비밀번호"></input>
           </div>
-          <button type='button' onClick={ send }>로그인</button>
+          <button type='button' onClick={ send }>로그인</button><br />
+        </form>
+        <form action='/api/user/google/login' method='GET'>
+          <button>구글 로그인</button>
         </form>
       </div>
     </div>

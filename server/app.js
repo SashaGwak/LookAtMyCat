@@ -18,7 +18,6 @@ require('dotenv').config();
 
 /* DB */ 
 const mongoose = require('mongoose');
-const MONGODB_URI = 'mongodb+srv://poemha:Mini1028!@clustertest.bwpwhd8.mongodb.net/Cat';
 
 /* routes */
 const authRouter = require('./routes/auth');
@@ -27,7 +26,7 @@ const feedRouter = require('./routes/feed');
 app.use('/api', feedRouter); 
 app.use('/api/user', authRouter);
 
-mongoose.connect(MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI)
   .then(result => {
     app.listen(8000, () => {
       console.log('Server start!');
