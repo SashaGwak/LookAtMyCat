@@ -13,11 +13,17 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false })); 
 app.use(bodyParser.json());
 
+/* 로그인 확인 미들웨어 */
+function isLoggedIn(req, res, next) {
+  req.user ? next() : res.sendStatus(401);
+}
+
 /* env */
 require('dotenv').config(); 
 
 /* DB */ 
 const mongoose = require('mongoose');
+const MONGODB_URI = process.env.MONGODB_URI
 
 /* routes */
 const authRouter = require('./routes/auth');
@@ -26,7 +32,7 @@ const feedRouter = require('./routes/feed');
 app.use('/api', feedRouter); 
 app.use('/api/user', authRouter);
 
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(MONGODB_URI)
   .then(result => {
     app.listen(8000, () => {
       console.log('Server start!');
