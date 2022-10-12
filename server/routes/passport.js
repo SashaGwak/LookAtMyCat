@@ -11,7 +11,6 @@ passport.use(new GoogleStrategy({
   function(accessToken, refreshToken, profile, done) {
     console.info('___new GoogleStrategy()');
     console.log('___google profile', profile);
-    console.log('__google email', profile._json.email);
     User.findOne({email : profile._json.email})
     .then(result => {
       console.log('여기가결과',result);
@@ -24,6 +23,7 @@ passport.use(new GoogleStrategy({
         user.save(err => console.log(err)); 
         return done(null, profile);
       }
+      // DB 사용자 정보 있으면 그냥 리턴
       return done(null, profile);
     })
     .catch(err => {
@@ -32,10 +32,12 @@ passport.use(new GoogleStrategy({
   }
 ));
 
+// login이 최초로 성공했을 때만 호출되는 함수
 passport.serializeUser(function(user, done) {
   done(null, user);
 }); 
 
+// 사용자가 페이지를 방문할 때마다 호출되는 함수
 passport.deserializeUser(function(user, done) {
   done(null, user);
 });
