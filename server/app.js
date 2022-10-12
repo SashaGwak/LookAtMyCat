@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 
 /* 로그인 확인 미들웨어 */
 function checkSession (req, res, next) {
-  if (req.session.user_id != null && req.session.user_id != '') next(); 
+  if (req.session.user_id != null && req.user !=null) next(); 
   else {
     res.redirect('/');
   }
@@ -32,8 +32,8 @@ const MONGODB_URI = process.env.MONGODB_URI
 const authRouter = require('./routes/auth');
 const feedRouter = require('./routes/feed');
 
-app.use('/api', feedRouter); 
 app.use('/api/user', authRouter);
+app.use('/api', feedRouter); 
 
 mongoose.connect(MONGODB_URI)
   .then(result => {
