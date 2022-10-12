@@ -14,8 +14,6 @@ router.get('/google/login',
   // 프로파일과 이메일 정보를 받는다.
   passport.authenticate('google', { scope: ['email', 'profile']}) 
 )
-
-/* 패스포트 로그인 후 라우터 */
 router.get('/google/callback', 
   passport.authenticate('google', {
     successRedirect: 'http://localhost:3000/', 
