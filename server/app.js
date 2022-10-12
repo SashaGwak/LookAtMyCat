@@ -32,8 +32,8 @@ const MONGODB_URI = process.env.MONGODB_URI
 const authRouter = require('./routes/auth');
 const feedRouter = require('./routes/feed');
 
-app.use('/api', feedRouter); 
 app.use('/api/user', authRouter);
+app.use('/api', feedRouter); 
 
 mongoose.connect(MONGODB_URI)
   .then(result => {
