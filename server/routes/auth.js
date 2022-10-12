@@ -20,7 +20,6 @@ router.get('/google/callback',
   })
 )
 
-
 /* 회원가입 페이지 */
 router.get('/signup', (req, res) => {
     res.json(data);
