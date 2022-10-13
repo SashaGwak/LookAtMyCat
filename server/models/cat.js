@@ -9,10 +9,11 @@ const catSchema = new Schema({
     },
     title: {
         type: String, 
-        require: true
+        require: true,
     }, 
     description: {
         type: String,
+        require: true,
     }, 
     imageUrl: {
         type: String,

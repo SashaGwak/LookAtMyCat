@@ -13,14 +13,6 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false })); 
 app.use(bodyParser.json());
 
-/* 로그인 확인 미들웨어 */
-function checkSession (req, res, next) {
-  if (req.session.user_id != null && req.user !=null) next(); 
-  else {
-    res.redirect('/');
-  }
-};
-
 /* env */
 require('dotenv').config(); 
 
