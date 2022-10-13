@@ -51,7 +51,7 @@ router.post('/upload', upload.single('file'), (req, res) => {
 
 /* 게시글 등록 기능 */
 router.post('/', async (req, res) => {
-  const { writer, title, description, imageUrl } = req.body;
+  const { title, description } = req.body;
   const cat = new Cat({
     writer : req.session.user_id, 
     title : title, 
@@ -59,7 +59,7 @@ router.post('/', async (req, res) => {
     imageUrl : filedata.filename, 
   }); 
   await cat.save(err => console.log(err));
-  return res.send({isCreate: true});
+  return res.send('게시글 등록 완료!');
 });
   
 
