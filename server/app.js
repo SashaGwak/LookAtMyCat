@@ -2,6 +2,9 @@ const express = require('express');
 const app = express(); 
 const passport = require('passport');
 
+/* 정적 파일 */
+app.use(express.static('uploads'));
+
 /* session */
 const session = require('express-session');
 app.use(session({ secret: 'secretcats' }));
