@@ -6,7 +6,7 @@ function Navbar() {
         <div className="navbar"> 
           <ul className='navbar_items'>
             <li><Link to='/'>HOME</Link></li>
-            <li><Link to='/feed'>Show Cat</Link></li>
+            <li><Link to='/feed'>Show My Cat</Link></li>
           </ul>
           <ul className='navbar_items'>
             <li><Link to='/user/login'>Login</Link></li>
