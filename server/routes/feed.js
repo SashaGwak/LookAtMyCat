@@ -34,11 +34,12 @@ router.get('/', (req, res) => {
   if (req.user) {
     req.session.user_id = req.user.id;
   };
-  // 게시물 정보 받아오기
-  Cat.find()
+  // 최신 게시물 정보 부터 받아오기
+  Cat.find().sort({ _id: -1})
   .then(result => {
     res.send(result);
   })
+  .catch(err => console.log(err));
 }); 
 
 /* 이미지 업로드 기능 */

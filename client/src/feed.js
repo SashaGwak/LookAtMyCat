@@ -5,7 +5,6 @@ import { useState } from 'react';
 import uploadFile from './fileAPI';
 
 function Feed() {
-  const [image, SetImage] = useState('');
   const upload = async(e) => {
     e.preventDefault();
     const formData = new FormData(); 
@@ -31,7 +30,6 @@ function Feed() {
           <label htmlFor='name'>😻 내용 : </label>
           <textarea type="text" name='description' placeholder="내용"></textarea>
         </div>
-          <input type="hidden" name='imageUrl' value={ image }></input>
         <button type='button'>등록</button><br />
       </form>
     </div>
