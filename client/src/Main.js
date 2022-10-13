@@ -9,7 +9,7 @@ function Main () {
       url:'/api'
     })
     .then(result => {
-      console.log(result.data); // {isCheck: true}
+      console.log(result.data); 
     })
   }, []);
   return (

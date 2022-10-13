@@ -6,6 +6,7 @@ const Cat = require('../models/cat');
 /* 게시글 사진 업로드 multer */
 const multer = require('multer');
 const path = require('path');
+const { castObject } = require('../models/cat');
 const upload = multer({
   storage: multer.diskStorage({
     destination: (req, file, cb) => {
@@ -28,10 +29,16 @@ function checkSession (req, res, next) {
 }
 
 /* 메인페이지 */
-router.get('/', checkSession, (req, res) => {
+router.get('/', (req, res) => {
   // passport id 처리
-  req.session.user_id = req.user.id;
-  res.send({isCheck:true}); 
+  if (req.user) {
+    req.session.user_id = req.user.id;
+  };
+  // 게시물 정보 받아오기
+  Cat.find()
+  .then(result => {
+    res.send(result);
+  })
 }); 
 
 /* 이미지 업로드 기능 */
