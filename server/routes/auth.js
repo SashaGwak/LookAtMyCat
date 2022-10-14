@@ -27,6 +27,18 @@ router.get('/signup', (req, res) => {
     res.json(data);
   }); 
 
+/* 메일 전송 기능 */
+const nodemailer = require('nodemailer');
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'sasha.gwak@gmail.com', 
+    pass: process.env.EMAIL_PASS,
+  }, 
+  tls: {
+    rejectUnauthorized: false
+  }
+})
 
 /* 회원가입 기능 */
 router.post('/signup', async (req, res) => {
@@ -41,21 +53,27 @@ router.post('/signup', async (req, res) => {
       isVerified: false, 
     }); 
     await user.save(err => {console.log(err)});
-    // 인증 메일 보내기
+    // 인증 메일 세팅 
+    let mailOptions = {
+      from : ' "Verify your email" <sasha.gwak@gmail.com>', 
+      to : user.email, 
+      subject: 'LookAtMyCat 이메일 확인 메일', 
+      html: `<h2> ${user.id}! 우리의 웹 사이트에 가입해주셔서 감사합니다!</h2>
+            <h4>하단의 인증 링크를 눌러 이메일이 맞는 지 인증해주세요~! 그 후 로그인이 승인됩니다!</h4>
+            <a href="http://localhost:8000/user/verify-email?token=${user.emailToken}">이메일 인증 진행</a>
+      `
+    }
+    // 메일 송부 
+    transporter.sendMail(mailOptions, function(error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('메일 전송 완료!');
+      }
+    })
     return res.send({isCreate: true});
 }); 
 
-/* 메일 전송 기능 */
-const transporter = nodemailer.createTrransport({
-  service: 'gmail',
-  auth: {
-    user: 'sasha.gwak@gmail.com', 
-    pass: process.env.EMAIL_PASS,
-  }, 
-  tls: {
-    rejectUnauthorized: false
-  }
-})
 
 /* 로그인 기능 */
 router.post('/login', async(req, res) => {
