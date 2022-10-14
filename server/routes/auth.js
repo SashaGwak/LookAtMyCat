@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router(); 
+
 const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
 
 const User = require('../models/user'); 
 
@@ -35,10 +37,25 @@ router.post('/signup', async (req, res) => {
       id: id, 
       email: email, 
       password: HashedPassword,
+      emailToken : crypto.randomBytes(64).toString('hex'), 
+      isVerified: false, 
     }); 
     await user.save(err => {console.log(err)});
+    // 인증 메일 보내기
     return res.send({isCreate: true});
 }); 
+
+/* 메일 전송 기능 */
+const transporter = nodemailer.createTrransport({
+  service: 'gmail',
+  auth: {
+    user: 'sasha.gwak@gmail.com', 
+    pass: process.env.EMAIL_PASS,
+  }, 
+  tls: {
+    rejectUnauthorized: false
+  }
+})
 
 /* 로그인 기능 */
 router.post('/login', async(req, res) => {
