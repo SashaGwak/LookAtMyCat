@@ -19,9 +19,6 @@ app.use(bodyParser.json());
 /* env */
 require('dotenv').config(); 
 
-/* email */
-const nodemailer = require('nodemailer');
-
 /* DB */ 
 const mongoose = require('mongoose');
 const MONGODB_URI = process.env.MONGODB_URI
