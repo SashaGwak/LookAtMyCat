@@ -19,7 +19,7 @@ function Login() {
       if (result.data.isLogin == true) {
         replace('/'); 
       } else {
-        alert('아이디와 비밀번호를 확인해주세요');
+        alert(result.data.msg);
       }
     })
     .catch(err => console.log(err));
