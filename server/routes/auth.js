@@ -29,6 +29,7 @@ router.get('/signup', (req, res) => {
 
 /* 메일 전송 기능 */
 const nodemailer = require('nodemailer');
+const user = require('../models/user');
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -60,7 +61,7 @@ router.post('/signup', async (req, res) => {
       subject: 'LookAtMyCat 이메일 확인 메일', 
       html: `<h2> ${user.id}! 우리의 웹 사이트에 가입해주셔서 감사합니다!</h2>
             <h4>하단의 인증 링크를 눌러 이메일이 맞는 지 인증해주세요~! 그 후 로그인이 승인됩니다!</h4>
-            <a href="http://localhost:8000/user/verify-email?token=${user.emailToken}">이메일 인증 진행</a>
+            <a href="http://localhost:8000/api/user/verify-email?token=${user.emailToken}">이메일 인증 진행</a>
       `
     }
     // 메일 송부 
@@ -74,6 +75,26 @@ router.post('/signup', async (req, res) => {
     return res.send({isCreate: true});
 }); 
 
+/* 메일 인증 */
+router.get('/verify-email', async(req, res) => {
+  try {
+    const token = req.query.token; 
+    const user = await User.findOne({emailToken: token})
+    if (user){
+      user.emailToken = null
+      user.isVerified = true
+      await user.save()
+      res.redirect('http://localhost:3000/user/login');
+    } else {
+      res.redirect('http://localhost:3000/user/signup');
+      console.log('이메일이 인증 실패')
+    }
+  }
+  catch {
+    console.log(err);
+  }
+})
+
 
 /* 로그인 기능 */
 router.post('/login', async(req, res) => {
@@ -84,11 +105,16 @@ router.post('/login', async(req, res) => {
     bcrypt.compare(password, data.password)
     .then(doMatch => {
       if (doMatch) { 
-        // session 생성
-        req.session.user_id = id;
-        return res.send({isLogin: true});
+        // 이메일 인증 확인 
+        if (data.isVerified) {
+          // session 생성
+          req.session.user_id = id;
+          return res.send({isLogin: true});
+        } else {
+          return res.send({isLogin: false, msg: "이메일로 전송된 메일을 확인해주세요"});
+        }
       } else {
-        return res.send({isLogin: false});
+        return res.send({isLogin: false, msg: '아이디와 비밀번호를 재확인해주세요'});
       }
     })
   })
