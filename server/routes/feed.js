@@ -7,6 +7,7 @@ const Cat = require('../models/cat');
 const multer = require('multer');
 const path = require('path');
 const { castObject } = require('../models/cat');
+const cat = require('../models/cat');
 const upload = multer({
   storage: multer.diskStorage({
     destination: (req, file, cb) => {
@@ -62,5 +63,15 @@ router.post('/', async (req, res) => {
   return res.send('게시글 등록 완료!');
 });
   
+/* 게시글 세부내용 페이지 */
+router.get('/cat/:id', (req, res) => {
+  const { id } = req.params;
+  Cat.findOne({ _id: id })
+  .then(result => {
+    console.log(result);
+    return res.send(result);
+  })
+  .catch(err => console.log(err));
+})
 
 module.exports = router;
