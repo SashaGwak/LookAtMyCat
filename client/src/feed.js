@@ -31,6 +31,7 @@ function Feed() {
   }
   return (
     <div className='main-container' >
+      <h1>게시물 등록</h1>
       {/* 이미지 부분 */}
       <form encType='multipart/form-data' onSubmit={ upload }>
         <input type='file' name='file' />

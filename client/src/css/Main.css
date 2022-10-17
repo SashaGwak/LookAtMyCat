@@ -1,6 +1,7 @@
 .main-container {
+    text-align: center;
     padding: 1rem;
-    margin: auto;
+    margin: 20px auto;
 }
 
 .main-container .form{
