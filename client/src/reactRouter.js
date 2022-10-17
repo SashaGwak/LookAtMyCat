@@ -13,7 +13,7 @@ function Router() {
                 <Route path="/feed" element={<Feed />}></Route>
                 <Route path="/user/login" element={<Login />}></Route>
                 <Route path="/user/signup" element={<Signup />}></Route>
-                <Route path="/cat/:id" element={<Detail />}></Route>
+                <Route path="/api/cat/:id" element={<Detail />}></Route>
             </Routes>
         </div>
     )

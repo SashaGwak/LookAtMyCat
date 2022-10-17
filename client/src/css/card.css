@@ -14,3 +14,20 @@
 h1 {
   text-align: center;
 }
+
+.detail-container {
+  text-align: center; 
+  margin: 50px auto;
+  width: fit-content;
+  border: 1px solid gray; 
+  padding: 50px;
+  border-radius: 5px; 
+}
+
+img {
+  height: 400px;
+}
+
+button {
+  margin: 20px 0 0 0; 
+}
