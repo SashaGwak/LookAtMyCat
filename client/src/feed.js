@@ -1,11 +1,9 @@
 import './css/Main.css';
-import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; 
 import uploadFile from './fileAPI';
 
 function Feed() {
-  const [image, SetImage] = useState('');
   const replace = useNavigate();
   // 파일 업로드
   const upload = async(e) => {

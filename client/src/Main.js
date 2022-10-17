@@ -23,7 +23,7 @@ function Main () {
     <>
       <h1>🐈 Cat saves the world! 🐈‍⬛</h1>
       {feeds.map((element) => (
-        <Card key={element._id} title={element.title} writer={element.writer} description={element.description} imageUrl={element.imageUrl} onClick={() => {navigate(`/cat/${element._id}`)}} />
+        <Card key={element._id} title={element.title} writer={element.writer} description={element.description} imageUrl={element.imageUrl} onClick={() => {navigate(`/api/cat/${element._id}`)}} />
       ))}
     </>
   )

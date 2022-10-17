@@ -16,7 +16,7 @@ function Login() {
       }
     })
     .then(result => {
-      if (result.data.isLogin == true) {
+      if (result.data.isLogin === true) {
         replace('/'); 
       } else {
         alert(result.data.msg);

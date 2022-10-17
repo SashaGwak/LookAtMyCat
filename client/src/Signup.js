@@ -16,7 +16,7 @@ function Singup() {
       }
     })
     .then(result => {
-      if (result.data.isCreate == true) {
+      if (result.data.isCreate === true) {
         replace("/user/login"); 
       }
     })
