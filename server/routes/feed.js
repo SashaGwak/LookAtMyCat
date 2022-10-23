@@ -6,8 +6,6 @@ const Cat = require('../models/cat');
 /* 게시글 사진 업로드 multer */
 const multer = require('multer');
 const path = require('path');
-const { castObject } = require('../models/cat');
-const cat = require('../models/cat');
 const upload = multer({
   storage: multer.diskStorage({
     destination: (req, file, cb) => {
